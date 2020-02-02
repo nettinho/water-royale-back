@@ -85,7 +85,6 @@ defmodule GameServerWeb.GameChannel do
     )
 
     if player.action != action do
-      IO.inspect "action change #{inspect action}"
       if action == -1 do
         handle_in("release_valve", %{
           "type" => player.action
@@ -156,8 +155,8 @@ defmodule GameServerWeb.GameChannel do
       fn(p) -> p
         |> Map.update!(:water_rate,  fn r -> 
           case valve_type do
-            0 -> r - 1
-            1 -> r + 1
+            0 -> r - 5
+            1 -> r + 5
             _ -> r 
           end
         end)
@@ -175,8 +174,8 @@ defmodule GameServerWeb.GameChannel do
       target_id,
       fn(p) -> Map.update!(p, :water_rate,  fn r -> 
         case valve_type do
-          0 -> r + 1
-          1 -> r - 1
+          0 -> r + 5
+          1 -> r - 5
           _ -> r 
         end
       end)
@@ -195,8 +194,8 @@ defmodule GameServerWeb.GameChannel do
       socket.assigns.user,
       fn(p) -> Map.update!(p, :water_rate,  fn r -> 
         case valve_type do
-          0 -> r + 1
-          1 -> r - 1
+          0 -> r + 5
+          1 -> r - 5
           _ -> r 
         end
       end)
@@ -208,8 +207,8 @@ defmodule GameServerWeb.GameChannel do
       target_id,
       fn(p) -> Map.update!(p, :water_rate,  fn r -> 
         case valve_type do
-          0 -> r - 1
-          1 -> r + 1
+          0 -> r - 5
+          1 -> r + 5
           _ -> r 
         end
       end)
